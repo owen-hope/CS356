@@ -4,6 +4,8 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
+#include <fcntl.h>
+#include <unistd.h>
 #include <netinet/in.h>
 
 int main(int argc, char const *argv[]) {
