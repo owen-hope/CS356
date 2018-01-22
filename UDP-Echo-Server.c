@@ -12,6 +12,7 @@ int main(int argc, char const *argv[]) {
   int server_socket, client_socket, n;
   char server_message[256] = "You have reached the UDP server!";
   char msg[256];
+  socklen_t len;
   //create the server socket
   server_socket = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -27,10 +28,11 @@ int main(int argc, char const *argv[]) {
 
   //sendto(server_socket, server_message, strlen(server_message), 0, (struct sockaddr*) &client_address, sizeof(client_address));
   while(1) {
-    n = recvfrom(server_socket, msg, sizeof(msg), 0 ,(struct sockaddr*) &client_address, sizeof(client_address));
+    len=sizeof(client_address);
+    n = recvfrom(server_socket, msg, sizeof(msg), 0 ,(struct sockaddr*) &client_address, &len);
     printf("message: %s\n", msg);
 
-    sendto(server_socket, msg, n, 0, (struct sockaddr*) &client_address, sizeof(client_address));
+    sendto(server_socket, msg, n, 0, (struct sockaddr*) &client_address, len);
   }
   close(server_socket);
   return 0;

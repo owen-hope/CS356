@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <sys/socket.h>
 #include <sys/types.h>
@@ -8,9 +9,11 @@
 #include <unistd.h>
 #include <netinet/in.h>
 
+#define MAXLINE 1024
+
 int main(int argc, char const *argv[]) {
   int net_Socket, error, recvFrom, status, n;
-  char server_response[256];
+  char server_response[256], sendline[256];
 
   strcpy(sendline, "");
   printf("\n Enter the message: ");
@@ -27,7 +30,7 @@ int main(int argc, char const *argv[]) {
 
 
 
-  sendto(net_Socket, sendline, strlen(hello), 0, (struct sockaddr*) &server_address, sizeof(server_address));
+  sendto(net_Socket, sendline, MAXLINE, 0, (struct sockaddr*) &server_address, sizeof(server_address));
 
   n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
   server_response[n] = 0;
