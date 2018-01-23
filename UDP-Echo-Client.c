@@ -17,7 +17,7 @@ int main(int argc, char const *argv[]) {
   char server_response[256], sendline[1024];
 
   portNum = atoi(argv[1]);
-
+  printf("%d\n", portNum);
   strcpy(sendline, "");
   printf("\n Enter the message: ");
   fgets(sendline, MAXLINE, stdin);
@@ -28,7 +28,7 @@ int main(int argc, char const *argv[]) {
   struct sockaddr_in client_address;
   struct sockaddr_in server_address;
   server_address.sin_family = AF_INET;
-  server_address.sin_port = htons(net_Socket);
+  server_address.sin_port = htons(portNum);
   server_address.sin_addr.s_addr = INADDR_ANY;
 
   printf("this is the send line1: %s\n", sendline);
