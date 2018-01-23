@@ -13,7 +13,7 @@
 
 int main(int argc, char const *argv[]) {
   int net_Socket, error, recvFrom, status, n;
-  char server_response[256], sendline[256];
+  char server_response[256], sendline[1024];
 
   strcpy(sendline, "");
   printf("\n Enter the message: ");
