@@ -34,7 +34,7 @@ int main(int argc, char const *argv[]) {
 
   n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
   server_response[n] = 0;
-  printf("\nServers Echo: %s\n", server_response);
+  printf("\nServers Echoing back: %s\n", server_response);
 
   close(net_Socket);
   return 0;
