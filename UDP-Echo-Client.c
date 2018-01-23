@@ -17,7 +17,7 @@ int main(int argc, char const *argv[]) {
 
   strcpy(sendline, "");
   printf("\n Enter the message: ");
-  scanf("%s", sendline);
+  fgets(sendline, MAXLINE, stdin);
   //create a socket
   net_Socket = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -28,12 +28,13 @@ int main(int argc, char const *argv[]) {
   server_address.sin_port = htons(9007);
   server_address.sin_addr.s_addr = INADDR_ANY;
 
-
+  printf("this is the send line1: %s\n", sendline);
 
   sendto(net_Socket, sendline, MAXLINE, 0, (struct sockaddr*) &server_address, sizeof(server_address));
 
   n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
   server_response[n] = 0;
+  printf("this is the send line: %s\n", sendline);
   printf("\nServers Echoing back: %s\n", server_response);
 
   close(net_Socket);
