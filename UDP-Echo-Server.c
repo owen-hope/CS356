@@ -11,7 +11,7 @@
 int main(int argc, char const *argv[]) {
   int server_socket, client_socket, n;
   char server_message[256] = "You have reached the UDP server!";
-  char msg[256];
+  char msg[1024];
   socklen_t len;
   //create the server socket
   server_socket = socket(AF_INET, SOCK_DGRAM, 0);
