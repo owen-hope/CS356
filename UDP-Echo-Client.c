@@ -24,7 +24,10 @@ int main(int argc, char const *argv[]) {
   printf("\n Enter the message: ");
   fgets(sendline, maxLine, stdin);
   //create a socket
-  net_Socket = socket(AF_INET, SOCK_DGRAM, 0);
+  if ((net_Socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
+    perror("cannot create socket\n");
+    return 1;
+  }
 
   //specify an address for the socket
   struct sockaddr_in server_address;
@@ -32,14 +35,21 @@ int main(int argc, char const *argv[]) {
   server_address.sin_port = htons(portNum);
   inet_aton(argv[1], &server_address.sin_addr);
 
-  printf("this is the send line1: %s\n", sendline);
+  if (sendto(net_Socket, sendline, maxLine, 0, (struct sockaddr*) &server_address, sizeof(server_address)) < 0) {
+    perror("send failed");
+    return 1;
+  }
 
-  sendto(net_Socket, sendline, maxLine, 0, (struct sockaddr*) &server_address, sizeof(server_address));
+  printf("data has been sent to the server. \nDestination IP: %s\n Destination
+    Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
+    argv[2], argv[3], sendline);
 
   n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
-  server_response[n] = 0;
-  printf("this is the send line: %s\n", sendline);
-  printf("\nServers Echoing back: %s\n", server_response);
+  if (n > 0) {
+    server_response[n] = 0;
+    printf("\nServers Echoing back: %s\n", server_response);
+
+  }
 
   close(net_Socket);
   return 0;

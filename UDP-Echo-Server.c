@@ -10,7 +10,7 @@
 
 int main(int argc, char const *argv[]) {
   int server_socket, client_socket, n;
-  char server_message[256] = "You have reached the UDP server!";
+  char *ip = inet_ntoa(client_address.sin_addr);
   char msg[1024];
   socklen_t len;
   //create the server socket
@@ -30,7 +30,7 @@ int main(int argc, char const *argv[]) {
   while(1) {
     len=sizeof(client_address);
     n = recvfrom(server_socket, msg, sizeof(msg), 0 ,(struct sockaddr*) &client_address, &len);
-    printf("message: %s\n", msg);
+    printf("message: %s\n client IP %s\n", msg, &ip);
 
     sendto(server_socket, msg, n, 0, (struct sockaddr*) &client_address, len);
   }
