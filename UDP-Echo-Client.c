@@ -16,15 +16,19 @@ int main(int argc, char const *argv[]) {
   int net_Socket, error, recvFrom, status, n;
   int portNum, maxLine;
   char server_response[256], sendline[1024];
+  char *IP;
 
-  maxLine = atoi(argv[3]);
+  IP = argv[1];
   portNum = atoi(argv[2]);
+  maxLine = atoi(argv[3]);
+
   printf("%d\n", portNum);
   strcpy(sendline, "");
   printf("\n Enter the message: ");
   fgets(sendline, maxLine, stdin);
   //create a socket
-  if ((net_Socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
+  net_Socket = socket(AF_INET, SOCK_DGRAM, 0);
+  if (net_Socket < 0){
     perror("cannot create socket\n");
     return 1;
   }
@@ -33,15 +37,16 @@ int main(int argc, char const *argv[]) {
   struct sockaddr_in server_address;
   server_address.sin_family = AF_INET;
   server_address.sin_port = htons(portNum);
-  inet_aton(argv[1], &server_address.sin_addr);
+  inet_aton(IP, &server_address.sin_addr);
 
-  if (sendto(net_Socket, sendline, maxLine, 0, (struct sockaddr*) &server_address, sizeof(server_address)) < 0) {
+  n = sendto(net_Socket, sendline, maxLine, 0, (struct sockaddr*) &server_address, sizeof(server_address));
+  if ( n < 0) {
     perror("send failed");
     return 1;
   }
 
-  printf("data has been sent to the server. \nDestination IP: %s\n Destination
-    Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
+  printf("data has been sent to the server. \nDestination IP: %s\n Destination"
+    "Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
     argv[2], argv[3], sendline);
 
   n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
