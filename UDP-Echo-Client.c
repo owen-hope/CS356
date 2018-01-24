@@ -45,7 +45,7 @@ int main(int argc, char const *argv[]) {
     perror("send failed");
     return 1;
   }
-  printf("n is: %d\n", n);
+  //printf("n is: %d\n", n);
   printf("data has been sent to the server. \nDestination IP: %s\n Destination"
     "Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
     argv[2], argv[3], sendline);
