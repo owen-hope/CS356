@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]) {
   int net_Socket, error, recvFrom, status, n;
   int portNum, maxLine;
   char server_response[256], sendline[1024];
-  const char *IP;
+  char IP;
 
   IP = argv[1];
   portNum = atoi(argv[2]);
@@ -44,7 +44,7 @@ int main(int argc, char const *argv[]) {
     perror("send failed");
     return 1;
   }
-
+  printf("n is: %d", n);
   printf("data has been sent to the server. \nDestination IP: %s\n Destination"
     "Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
     argv[2], argv[3], sendline);
