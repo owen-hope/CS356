@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]) {
   int net_Socket, error, recvFrom, status, n;
   int portNum, maxLine;
   char server_response[256], sendline[1024];
-  char *IP;
+  char IP;
 
   IP = argv[1];
   portNum = atoi(argv[2]);
