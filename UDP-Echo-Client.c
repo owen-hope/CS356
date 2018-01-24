@@ -10,18 +10,19 @@
 #include <unistd.h>
 #include <netinet/in.h>
 
-#define MAXLINE 1024
+//#define MAXLINE 1024
 
 int main(int argc, char const *argv[]) {
   int net_Socket, error, recvFrom, status, n;
-  int portNum;
+  int portNum, maxLine;
   char server_response[256], sendline[1024];
 
+  maxLine = atoi(argv[3]);
   portNum = atoi(argv[2]);
   printf("%d\n", portNum);
   strcpy(sendline, "");
   printf("\n Enter the message: ");
-  fgets(sendline, MAXLINE, stdin);
+  fgets(sendline, maxLine, stdin);
   //create a socket
   net_Socket = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -33,7 +34,7 @@ int main(int argc, char const *argv[]) {
 
   printf("this is the send line1: %s\n", sendline);
 
-  sendto(net_Socket, sendline, MAXLINE, 0, (struct sockaddr*) &server_address, sizeof(server_address));
+  sendto(net_Socket, sendline, maxLine, 0, (struct sockaddr*) &server_address, sizeof(server_address));
 
   n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
   server_response[n] = 0;
