@@ -13,7 +13,8 @@
 //#define MAXLINE 1024
 
 int main(int argc, char const *argv[]) {
-  int net_Socket, error, recvFrom, status, n;
+  int net_Socket, error, recvFrom, status;
+  ssize_t n;
   int portNum, maxLine;
   char server_response[256], sendline[1024];
   const char *IP;
@@ -29,7 +30,7 @@ int main(int argc, char const *argv[]) {
   //create a socket
   net_Socket = socket(AF_INET, SOCK_DGRAM, 0);
   if (net_Socket < 0){
-    perror("cannot create socket\n");
+    printf("cannot create socket\n");
     return 1;
   }
 
@@ -44,7 +45,7 @@ int main(int argc, char const *argv[]) {
     perror("send failed");
     return 1;
   }
-  printf("n is: %d", n);
+  printf("n is: %d\n", n);
   printf("data has been sent to the server. \nDestination IP: %s\n Destination"
     "Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
     argv[2], argv[3], sendline);
