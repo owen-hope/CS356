@@ -69,6 +69,7 @@ int main(int argc, char const *argv[]) {
     } else {
       server_response[n] = 0;
       printf("\nServers Echoing back: %s\n", server_response);
+      break;
     }
 
     count++;
