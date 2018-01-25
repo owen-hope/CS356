@@ -54,7 +54,7 @@ int main(int argc, char const *argv[]) {
 
     tv.tv_sec = 1;
     tv.tv_usec = 0;
-    if (setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(timeval)) < 0) {
+    if (setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv)) < 0) {
       printf("Error");
       return 1;
     }
