@@ -52,18 +52,19 @@ int main(int argc, char const *argv[]) {
     "Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
     argv[2], argv[3], sendline);
 
-    tv.tv_sec = 1;
+    tv.tv_sec = 5;
     tv.tv_usec = 0;
-    if (setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv)) < 0) {
-      printf("Error");
-      return 1;
-    }
+    setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
+
 
   n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
-  if (n > 0) {
+  if (n <= 0) {
+    perror("has not recieved in last 5 seconds");
+    return 0;
+    /*
     server_response[n] = 0;
     printf("\nServers Echoing back: %s\n", server_response);
-
+    */
   }
 
   close(net_Socket);
