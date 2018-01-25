@@ -26,6 +26,11 @@ int main(int argc, char const *argv[]) {
   portNum = atoi(argv[2]);
   maxLine = atoi(argv[3]);
 
+  if (portNum != 9007) {
+    perror("incorrect portnuber use 9007");
+    return 1;
+  }
+
   printf("%d\n", portNum);
   strcpy(sendline, "");
   printf("\n Enter the message: ");
@@ -37,8 +42,13 @@ int main(int argc, char const *argv[]) {
     return 1;
   }
 
+  struct sockaddr_in client_address;
+  socklen_t addr_len = sizeof(client_address);
+
   //specify an address for the socket
   struct sockaddr_in server_address;
+
+
   server_address.sin_family = AF_INET;
   server_address.sin_port = htons(portNum);
   inet_aton(IP, &server_address.sin_addr);
@@ -59,7 +69,7 @@ int main(int argc, char const *argv[]) {
 
   while (count < 3) {
     setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
-    n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
+    n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, (struct sockaddr*)&client_address, &addr_len);
     if (n <= 0) {
       printf("has not recieved message in last second %d more attempts\n", MAXCOUNT-count);
       int test = sendto(net_Socket, sendline, maxLine, 0, (struct sockaddr*) &server_address, sizeof(server_address));
@@ -68,6 +78,7 @@ int main(int argc, char const *argv[]) {
       }
     } else {
       server_response[n] = 0;
+      printf("Got packet from%s\n", inet_ntoa(client_address.sin_addr));
       printf("\nServers Echoing back: %s\n", server_response);
       break;
     }
