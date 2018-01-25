@@ -15,7 +15,8 @@
 
 int main(int argc, char const *argv[]) {
   struct timeval tv;
-  int net_Socket, error, recvFrom, status, count;
+  int net_Socket, error, recvFrom, status;
+  int count = 0;
   ssize_t n;
   int portNum, maxLine;
   char server_response[256], sendline[1024];
@@ -56,7 +57,7 @@ int main(int argc, char const *argv[]) {
     tv.tv_usec = 0;
     setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
 
-  while (count < MAXCOUNT) {
+  while (count < 3) {
     n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
     if (n <= 0) {
       printf("has not recieved message in last second %d more tries", MAXCOUNT-count);
