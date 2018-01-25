@@ -10,12 +10,12 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <netinet/in.h>
-
+#define MAXCOUNT 3
 //#define MAXLINE 1024
 
 int main(int argc, char const *argv[]) {
   struct timeval tv;
-  int net_Socket, error, recvFrom, status;
+  int net_Socket, error, recvFrom, status, count;
   ssize_t n;
   int portNum, maxLine;
   char server_response[256], sendline[1024];
@@ -56,16 +56,19 @@ int main(int argc, char const *argv[]) {
     tv.tv_usec = 0;
     setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
 
+  while (count < MAXCOUNT) {
+    n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
+    if (n <= 0) {
+      printf("has not recieved message in last second %d more tries", MAXCOUNT-count);
+      return 0;
+    } else {
+      server_response[n] = 0;
+      printf("\nServers Echoing back: %s\n", server_response);
+    }
 
-  n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
-  if (n <= 0) {
-    perror("has not recieved in last 5 seconds");
-    return 0;
-    /*
-    server_response[n] = 0;
-    printf("\nServers Echoing back: %s\n", server_response);
-    */
+    count++;
   }
+
 
   close(net_Socket);
   return 0;
