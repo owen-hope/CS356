@@ -5,6 +5,7 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <sys/time.h>
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -13,6 +14,7 @@
 //#define MAXLINE 1024
 
 int main(int argc, char const *argv[]) {
+  struct timeval tv;
   int net_Socket, error, recvFrom, status;
   ssize_t n;
   int portNum, maxLine;
@@ -49,6 +51,12 @@ int main(int argc, char const *argv[]) {
   printf("data has been sent to the server. \nDestination IP: %s\n Destination"
     "Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
     argv[2], argv[3], sendline);
+
+    tv.tv_sec = 1;
+    if (setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0) {
+      perror("Error");
+      return 1;
+    }
 
   n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
   if (n > 0) {
