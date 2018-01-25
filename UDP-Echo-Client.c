@@ -61,7 +61,7 @@ int main(int argc, char const *argv[]) {
     setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
     n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
     if (n <= 0) {
-      printf("has not recieved message in last second %d more tries\n", MAXCOUNT-count);
+      printf("has not recieved message in last second %d more attempts\n", MAXCOUNT-count);
       sendto(net_Socket, sendline, maxLine, 0, (struct sockaddr*) &server_address, sizeof(server_address));
     } else {
       server_response[n] = 0;
