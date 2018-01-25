@@ -52,10 +52,10 @@ int main(int argc, char const *argv[]) {
     "Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
     argv[2], argv[3], sendline);
 
-    tv.tv_sec = 0;
-    tv.tv_usec = 100000;
-    if (setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv)) < 0) {
-      perror("Error");
+    tv.tv_sec = 1;
+    tv.tv_usec = 0;
+    if (setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(timeval)) < 0) {
+      printf("Error");
       return 1;
     }
 
