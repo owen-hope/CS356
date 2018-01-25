@@ -62,7 +62,10 @@ int main(int argc, char const *argv[]) {
     n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
     if (n <= 0) {
       printf("has not recieved message in last second %d more attempts\n", MAXCOUNT-count);
-      sendto(net_Socket, sendline, maxLine, 0, (struct sockaddr*) &server_address, sizeof(server_address));
+      int test = sendto(net_Socket, sendline, maxLine, 0, (struct sockaddr*) &server_address, sizeof(server_address));
+      if (test < 0) {
+        perror("send failed");
+      }
     } else {
       server_response[n] = 0;
       printf("\nServers Echoing back: %s\n", server_response);
