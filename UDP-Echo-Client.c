@@ -53,14 +53,15 @@ int main(int argc, char const *argv[]) {
     "Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
     argv[2], argv[3], sendline);
 
-    tv.tv_sec = 5;
+    tv.tv_sec = 1;
     tv.tv_usec = 0;
-    setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
+
 
   while (count < 3) {
+    setsockopt(net_Socket, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
     n = recvfrom(net_Socket, server_response, sizeof(server_response), 0, NULL, NULL);
     if (n <= 0) {
-      printf("has not recieved message in last second %d more tries", MAXCOUNT-count);
+      printf("has not recieved message in last second %d more tries\n", MAXCOUNT-count);
       sendto(net_Socket, sendline, maxLine, 0, (struct sockaddr*) &server_address, sizeof(server_address));
     } else {
       server_response[n] = 0;
