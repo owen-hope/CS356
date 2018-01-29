@@ -16,11 +16,6 @@ int main(int argc, char const *argv[]) {
   //create the server socket
   server_socket = socket(AF_INET, SOCK_DGRAM, 0);
 
-  //Random number generator 0-10
-  srand(time(NULL));
-
-  randomNum = rand() % 11;
-
   //define the server address
   struct sockaddr_in server_address;
   struct sockaddr_in client_address;
@@ -33,6 +28,10 @@ int main(int argc, char const *argv[]) {
 
   //sendto(server_socket, server_message, strlen(server_message), 0, (struct sockaddr*) &client_address, sizeof(client_address));
   while(1) {
+    //Random number generator 0-10
+    srand(time(NULL));
+    randomNum = rand() % 11;
+
     len=sizeof(client_address);
     n = recvfrom(server_socket, msg, sizeof(msg), 0 ,(struct sockaddr*) &client_address, &len);
     printf("message: %s\n", msg);
