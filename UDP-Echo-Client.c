@@ -80,7 +80,7 @@ int main(int argc, char const *argv[]) {
       }
     } else {
       server_response[n] = 0;
-      printf("Got packet from: %s\n", inet_ntoa(client_address.sin_addr));
+      printf("Got packet from%s\n", inet_ntoa(client_address.sin_addr));
       printf("\nServers Echoing back: %s\n", server_response);
       break;
     }
