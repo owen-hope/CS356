@@ -3,17 +3,23 @@
 
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <time.h>
 
 #include <fcntl.h>
 #include <unistd.h>
 #include <netinet/in.h>
 
 int main(int argc, char const *argv[]) {
-  int server_socket, client_socket, n;
+  int server_socket, client_socket, n, randomNum;
   char msg[1024];
   socklen_t len;
   //create the server socket
   server_socket = socket(AF_INET, SOCK_DGRAM, 0);
+
+  //Random number generator 0-10
+  srand(time(NULL));
+
+  randomNum = rand() % 11;
 
   //define the server address
   struct sockaddr_in server_address;
@@ -31,7 +37,11 @@ int main(int argc, char const *argv[]) {
     n = recvfrom(server_socket, msg, sizeof(msg), 0 ,(struct sockaddr*) &client_address, &len);
     printf("message: %s\n", msg);
 
-    sendto(server_socket, msg, n, 0, (struct sockaddr*) &client_address, len);
+    if (randomNum < 4) {
+      printf("This is a staged packet drop\n");
+    }else {
+      sendto(server_socket, msg, n, 0, (struct sockaddr*) &client_address, len);
+    }
   }
   close(server_socket);
   return 0;
