@@ -28,19 +28,11 @@ int main(int argc, char const *argv[]) {
 
   //sendto(server_socket, server_message, strlen(server_message), 0, (struct sockaddr*) &client_address, sizeof(client_address));
   while(1) {
-    //Random number generator 0-10
-    srand(time(NULL));
-    randomNum = rand() % 11;
-
     len=sizeof(client_address);
     n = recvfrom(server_socket, msg, sizeof(msg), 0 ,(struct sockaddr*) &client_address, &len);
     printf("message: %s\n", msg);
 
-    if (randomNum < 4) {
-      printf("This is a staged packet drop. ranNum: %d\n", randomNum);
-    }else {
-      sendto(server_socket, msg, n, 0, (struct sockaddr*) &client_address, len);
-    }
+    sendto(server_socket, msg, n, 0, (struct sockaddr*) &client_address, len);
   }
   close(server_socket);
   return 0;

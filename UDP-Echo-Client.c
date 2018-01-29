@@ -88,11 +88,6 @@ int main(int argc, char const *argv[]) {
     count++;
   }
 
-  while (pingCount < PINGAMOUNT) {
-    n = sendto(net_Socket, )
-  }
-
-
   close(net_Socket);
   return 0;
 }
