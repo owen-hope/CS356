@@ -11,11 +11,12 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #define MAXCOUNT 3
+#define PINGAMOUNT 10
 //#define MAXLINE 1024
 
 int main(int argc, char const *argv[]) {
   struct timeval tv;
-  int net_Socket, error, recvFrom, status;
+  int net_Socket, error, recvFrom, status, pingCount;
   int count = 0;
   ssize_t n;
   int portNum, maxLine;
@@ -63,6 +64,7 @@ int main(int argc, char const *argv[]) {
     "Port:%s\n Length of string to be send %s\n string to be sent %s\n", argv[1],
     argv[2], argv[3], sendline);
 
+    //set recvfrom timeout to 1 second
     tv.tv_sec = 1;
     tv.tv_usec = 0;
 
@@ -84,6 +86,10 @@ int main(int argc, char const *argv[]) {
     }
 
     count++;
+  }
+
+  while (pingCount < PINGAMOUNT) {
+    n = sendto(net_Socket, )
   }
 
 

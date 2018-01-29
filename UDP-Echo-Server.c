@@ -37,7 +37,7 @@ int main(int argc, char const *argv[]) {
     printf("message: %s\n", msg);
 
     if (randomNum < 4) {
-      printf("This is a staged packet drop\n");
+      printf("This is a staged packet drop. ranNum: %d\n", randomNum);
     }else {
       sendto(server_socket, msg, n, 0, (struct sockaddr*) &client_address, len);
     }
