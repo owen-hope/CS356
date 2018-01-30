@@ -48,9 +48,9 @@ int main(int argc, char const *argv[]) {
 
   while (pingCount <= PINGAMOUNT) {
     //populate the first element in array message type & set in byte order
-    message[0] = htons(PINGREQUEST)
+    messages[0] = htons(PINGREQUEST)
     //populates second element in array to the sequence number & set it in byte order
-    message[1] = htons(pingCount);
+    messages[1] = htons(pingCount);
 
     n = sendto(client_socket, message, sizeof(message), 0, (struct sockaddr*)
       &server_address, sizeof(server_address));
