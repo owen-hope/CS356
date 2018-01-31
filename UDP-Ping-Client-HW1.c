@@ -107,9 +107,9 @@ int main(int argc, char const *argv[]) {
 
     pingCount += 1;
   }
-  percentPacketLoss = ((packetsLost/PINGAMOUNT) * 100);
+  percentPacketLoss = ((packetsLost/10) * 100);
   printf("Number of packes sent: %i Recieved: %i Loss rate: %i%%\n",
-    pingCount, packetsRecieved, percentPacketLoss);
+    PINGAMOUNT, packetsRecieved, percentPacketLoss);
 
   close(client_socket);
   return 0;
