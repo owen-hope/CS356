@@ -26,7 +26,8 @@ int main(int argc, char const *argv[]) {
   //the array [0] is message type [1] is sequence number
   int client_socket, n, packetsRecieved = 0;
   double packetsLost = 0;
-  double minRTT = 0, maxRTT = 0, aveRTT = 0;
+  //Can set minRTT to 1 because if it is longer then 1 sec it times out
+  double minRTT = 1, maxRTT = 0, aveRTT = 0;
   int percentPacketLoss;
   int portNum;
   int pingCount = 1;
