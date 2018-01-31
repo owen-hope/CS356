@@ -89,6 +89,9 @@ int main(int argc, char const *argv[]) {
       //get end time to calculate RTT
       end_time = time(NULL);
 
+      double roundT = ((double)(end_time - start_time));
+      printf("round T T: %f\n", roundT);
+
       for (int i = 0; i < 2; i++) {
         serverMessagesConverted[i] = ntohs(serverMessages[i]);
       }
