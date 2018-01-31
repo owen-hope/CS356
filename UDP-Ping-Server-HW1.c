@@ -51,6 +51,7 @@ int main(int argc, char const *argv[]) {
       printf("This is a simulated packet loss\n");
     }else if (arrayConverted[0] == 1) {
       arrayConverted[0] == 2;
+      printf("%i\n", arrayConverted[0]);
 
       //convert array back to byte order to send
       for (int i = 0; i < 2; i++) {
