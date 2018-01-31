@@ -82,7 +82,7 @@ int main(int argc, char const *argv[]) {
       perror("send failed");
       return 1;
     }
-    sleep(2);
+    //sleep(2);
     n = recvfrom(client_socket, serverMessages, sizeof(serverMessages), 0,
       (struct sockaddr*) &client_address, &addr_len);
 
@@ -95,7 +95,6 @@ int main(int argc, char const *argv[]) {
       for (int i = 0; i < 2; i++) {
         serverMessagesConverted[i] = ntohs(serverMessages[i]);
       }
-      printf("%i\n",serverMessagesConverted[0]);
 
     if (n <= 0) {
       printf("Ping message number %d timed out\n", pingCount);

@@ -57,6 +57,7 @@ int main(int argc, char const *argv[]) {
       for (int i = 0; i < 2; i++) {
         arrayToSend[i] = htons(arrayConverted[i]);
       }
+      usleep(randomNum);
       sendto(server_socket, arrayToSend, sizeof(arrayToSend), 0,
         (struct sockaddr*) &client_address, len);
     }
