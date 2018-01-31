@@ -24,7 +24,8 @@ double RTTCalculation (time_t start, time_t end) {
 
 int main(int argc, char const *argv[]) {
   //the array [0] is message type [1] is sequence number
-  int client_socket, n;
+  int client_socket, n, packetsRecieved = 0, packetsLost = 0;
+  int percentPacketLoss;
   int portNum;
   int pingCount = 1;
   int messages[2];
@@ -90,7 +91,6 @@ int main(int argc, char const *argv[]) {
     clock_t end = clock();
 
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    printf("the clock_t time: %f\n", time_spent);
 
     for (int i = 0; i < 2; i++) {
       serverMessagesConverted[i] = ntohs(serverMessages[i]);
@@ -98,13 +98,18 @@ int main(int argc, char const *argv[]) {
 
     if (n <= 0) {
       printf("Ping message number %d timed out\n", pingCount);
+      packetsLost += 1;
     } else if (serverMessagesConverted[0] == 2) {
       printf("ping message number %d RTT: %f secs\n", pingCount,
         time_spent);
+      packetsRecieved += 1;
     }
 
     pingCount += 1;
   }
+  percentPacketLoss = ((packetsLost/PINGAMOUNT) * 100);
+  printf("Number of packes sent: %i Recieved: %i Loss rate: %i%%\n",
+    pingCount, packetsRecieved, percentPacketLoss);
 
   close(client_socket);
   return 0;
