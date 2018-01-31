@@ -11,8 +11,12 @@
 #define PORTNUM 9007
 
 int main(int argc, char const *argv[]) {
+  //the array [0] is message type [1] is sequence number
   int server_socket, client_socket, n, randomNum;
   char msg[1024];
+  int arrayConverted[2];
+  int arrayReceived[2];
+  int arrayToSend[2];
   socklen_t len;
 
   //create the server sockt
@@ -35,15 +39,28 @@ int main(int argc, char const *argv[]) {
     randomNum = rand() % 11;
 
     len = sizeof(client_address);
-    n = recvfrom(server_socket, msg, sizeof(msg), 0, (struct sockaddr*)
+    n = recvfrom(server_socket, arrayReceived, sizeof(arrayReceived), 0, (struct sockaddr*)
     &client_address, &len);
-    printf("message: %s\n", msg);
+    //convert from byte order to int;
+    for (int i = 0; i < 2; i++) {
+      arrayConverted[i] = ntohs(arrayReceived[i]);
+    }
+
+    //change [0] from 1(ping request) to 2(ping response)
+    if (arrayConverted[0] == 1) {
+      arrayConverted[0] == 2;
+    }
 
     //packet fake packet loss
     if (randomNum < 4) {
       printf("This is a simulated packet loss\n");
     }else {
-      sendto(server_socket, msg, n, 0, (struct sockaddr*) &client_address, len);
+      //convert array back to byte order to send
+      for (int i = 0; i < 2; i++) {
+        arrayToSend[i] = htons(arrayConverted[i]);
+      }
+      sendto(server_socket, arrayToSend, sizeof(arrayToSend), 0,
+        (struct sockaddr*) &client_address, len);
     }
   }
   close(server_socket);

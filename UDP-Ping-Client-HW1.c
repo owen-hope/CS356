@@ -14,13 +14,25 @@
 #define PINGAMOUNT 10
 #define PINGREQUEST 1
 
+double RTTCalculation (time_t start, time_t end) {
+  double RTTCalc;
+
+  RTTCalc = ((double)(end - start));
+  return RTTCalc;
+}
+
 int main(int argc, char const *argv[]) {
+  //the array [0] is message type [1] is sequence number
   int client_socket, n;
   int portNum;
   int pingCount = 1;
   int messages[2];
+  int serverMessages[2];
+  int serverMessagesConverted[2];
   socklen_t addr_len;
   const char *IP;
+  clock_t time;
+  time_t start_time, end_time;
 
   IP = argv[1];
   portNum = atoi(argv[2]);
@@ -46,11 +58,22 @@ int main(int argc, char const *argv[]) {
   server_address.sin_port = htons(portNum);
   inet_aton(IP, &server_address.sin_addr);
 
+  //Set the timeout for the socket waiting for response
+  struct timeval tv;
+  tv.tv_sec = 1;
+  tv.tv_usec = 0;
+  setsockopt(client_socket, SOL_SOCKET, SO_RCVTIMEO, (const char*) &tv, sizeof(tv));
+
+  printf("Pinging %s, %d:\n", IP, portNum);
   while (pingCount <= PINGAMOUNT) {
+
     //populate the first element in array message type & set in byte order
     messages[0] = htons(PINGREQUEST);
     //populates second element in array to the sequence number & set it in byte order
     messages[1] = htons(pingCount);
+
+    //get start time to calculate RTT
+    start_time = time(NULL);
 
     n = sendto(client_socket, messages, sizeof(messages), 0, (struct sockaddr*)
       &server_address, sizeof(server_address));
@@ -58,6 +81,24 @@ int main(int argc, char const *argv[]) {
       perror("send failed");
       return 1;
     }
+
+    n = recvfrom(client_socket, serverMessages, sizeof(serverMessages), 0,
+      (struct sockaddr*) &client_address, &addr_len);
+
+      //get end time to calculate RTT
+      end_time = time(NULL);
+
+      for (int i = 0; i < 2; i++) {
+        serverMessagesConverted[i] = ntohs(serverMessages[i]);
+      }
+
+    if (n <= 0) {
+      printf("Ping message number %d timed out\n", pingCount);
+    } else {
+      printf("ping message number %d RTT: %f secs\n", pingCount,
+        RTTCalculation(start_time, end_time));
+    }
+
     pingCount += 1;
   }
 
