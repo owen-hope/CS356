@@ -45,6 +45,7 @@ int main(int argc, char const *argv[]) {
     for (int i = 0; i < 2; i++) {
       arrayConverted[i] = ntohs(arrayReceived[i]);
     }
+    printf("%i\n", arrayConverted[0]);
 
     //packet fake packet loss
     if (randomNum < 4) {
