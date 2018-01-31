@@ -75,6 +75,7 @@ int main(int argc, char const *argv[]) {
 
     //get start time to calculate RTT
     start_time = time(NULL);
+    clock_t begin = clock();
 
     n = sendto(client_socket, messages, sizeof(messages), 0, (struct sockaddr*)
       &server_address, sizeof(server_address));
@@ -83,14 +84,19 @@ int main(int argc, char const *argv[]) {
       return 1;
     }
     //sleep(2);
+    n = recvfrom(client_socket, serverMessages, sizeof(serverMessages), 0,
+      (struct sockaddr*) &client_address, &addr_len);
 
+    clock_t end = clock();
+
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    printf("the clock_t time: %f\n", time_spent);
 
       //get end time to calculate RTT
       end_time = time(NULL);
       printf("starttime: %f\n", (double)start_time);
       printf("endtime: %f\n", (double)end_time);
-      n = recvfrom(client_socket, serverMessages, sizeof(serverMessages), 0,
-        (struct sockaddr*) &client_address, &addr_len);
+
       double roundT = ((double)(end_time - start_time));
       printf("round T T: %f\n", roundT);
 
