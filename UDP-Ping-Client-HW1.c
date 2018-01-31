@@ -88,7 +88,8 @@ int main(int argc, char const *argv[]) {
 
       //get end time to calculate RTT
       end_time = time(NULL);
-
+      printf("starttime: %f\n", (double)start_time);
+      printf("endtime: %f\n", (double)end_time);
       double roundT = ((double)(end_time - start_time));
       printf("round T T: %f\n", roundT);
 
