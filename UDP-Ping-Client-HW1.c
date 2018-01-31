@@ -83,13 +83,14 @@ int main(int argc, char const *argv[]) {
       return 1;
     }
     //sleep(2);
-    n = recvfrom(client_socket, serverMessages, sizeof(serverMessages), 0,
-      (struct sockaddr*) &client_address, &addr_len);
+
 
       //get end time to calculate RTT
       end_time = time(NULL);
       printf("starttime: %f\n", (double)start_time);
       printf("endtime: %f\n", (double)end_time);
+      n = recvfrom(client_socket, serverMessages, sizeof(serverMessages), 0,
+        (struct sockaddr*) &client_address, &addr_len);
       double roundT = ((double)(end_time - start_time));
       printf("round T T: %f\n", roundT);
 
