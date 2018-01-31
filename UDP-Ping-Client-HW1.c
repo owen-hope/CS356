@@ -26,6 +26,7 @@ int main(int argc, char const *argv[]) {
   //the array [0] is message type [1] is sequence number
   int client_socket, n, packetsRecieved = 0;
   double packetsLost = 0;
+  double minRTT = 0, maxRTT = 0, aveRTT = 0;
   int percentPacketLoss;
   int portNum;
   int pingCount = 1;
@@ -104,13 +105,25 @@ int main(int argc, char const *argv[]) {
       printf("ping message number %d RTT: %f secs\n", pingCount,
         time_spent);
       packetsRecieved += 1;
+
+      if (time_spent < minRTT) {
+        minRTT = time_spent;
+      }
+      if (time_spent > maxRTT) {
+        maxRTT = time_spent;
+      }
+
+      aveRTT += time_spent;
     }
 
     pingCount += 1;
   }
+  aveRTT = aveRTT / packetsRecieved;
   percentPacketLoss = ((packetsLost/PINGAMOUNT) * 100);
   printf("Number of packes sent: %i Recieved: %i Loss rate: %i%%\n",
     PINGAMOUNT, packetsRecieved, percentPacketLoss);
+
+  printf("Min RTT: %f Max RTT: %f Ave RTT: %f\n", minRTT, maxRTT, aveRTT);
 
   close(client_socket);
   return 0;
