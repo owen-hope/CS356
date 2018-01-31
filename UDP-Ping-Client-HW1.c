@@ -107,7 +107,7 @@ int main(int argc, char const *argv[]) {
 
     pingCount += 1;
   }
-  printf("packets lost %i\n", packetsLost);
+  printf("packets lost %f\n", packetsLost/PINGAMOUNT);
   percentPacketLoss = ((packetsLost/PINGAMOUNT) * 100);
   printf("Number of packes sent: %i Recieved: %i Loss rate: %i%%\n",
     PINGAMOUNT, packetsRecieved, percentPacketLoss);
