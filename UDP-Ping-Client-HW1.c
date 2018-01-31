@@ -32,7 +32,7 @@ int main(int argc, char const *argv[]) {
   int serverMessagesConverted[2];
   socklen_t addr_len;
   const char *IP;
-  clock_t time;
+  //clock_t time;
   time_t start_time, end_time;
 
   IP = argv[1];
