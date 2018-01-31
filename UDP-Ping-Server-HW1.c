@@ -51,7 +51,7 @@ int main(int argc, char const *argv[]) {
     //packet fake packet loss
     if (randomNum < 4) {
       printf("This is a simulated packet loss\n");
-    }else if (arrayConverted[0] == 1) {
+    }else if (arrayConverted[0] == 1 && randomNum >= 4) {
       arrayConverted[0] = 2;
       printf("%i\n", arrayConverted[0]);
 
