@@ -95,10 +95,12 @@ int main(int argc, char const *argv[]) {
       for (int i = 0; i < 2; i++) {
         serverMessagesConverted[i] = ntohs(serverMessages[i]);
       }
+      printf("%i\n",serverMessagesConverted[0]);
 
     if (n <= 0) {
       printf("Ping message number %d timed out\n", pingCount);
-    } else if (serverMessagesConverted[0] == 2) {
+    }
+    if (serverMessagesConverted[0] == 2) {
       printf("ping message number %d RTT: %f secs\n", pingCount,
         RTTCalculation(start_time, end_time));
     }
