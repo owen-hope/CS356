@@ -24,7 +24,8 @@ double RTTCalculation (time_t start, time_t end) {
 
 int main(int argc, char const *argv[]) {
   //the array [0] is message type [1] is sequence number
-  int client_socket, n, packetsRecieved = 0, packetsLost = 0;
+  int client_socket, n, packetsRecieved = 0;
+  double packetsLost = 0;
   int percentPacketLoss;
   int portNum;
   int pingCount = 1;
