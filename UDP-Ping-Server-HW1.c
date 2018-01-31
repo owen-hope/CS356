@@ -12,7 +12,7 @@
 
 int main(int argc, char const *argv[]) {
   //the array [0] is message type [1] is sequence number
-  int server_socket, client_socket, n, randomNum;
+  int server_socket, client_socket, n, randomNum, usleepRandTime;
   char msg[1024];
   int arrayConverted[2];
   int arrayReceived[2];
@@ -37,6 +37,7 @@ int main(int argc, char const *argv[]) {
     //Random number generator 0-10
     srand(time(NULL));
     randomNum = rand() % 11;
+    usleepRandTime = rand() %30 + 1;
 
     len = sizeof(client_address);
     n = recvfrom(server_socket, arrayReceived, sizeof(arrayReceived), 0, (struct sockaddr*)
@@ -46,7 +47,7 @@ int main(int argc, char const *argv[]) {
       arrayConverted[i] = ntohs(arrayReceived[i]);
     }
     printf("%i\n", arrayConverted[0]);
-    usleep(randomNum * 10000);
+    usleep(usleepRandTime * 10000);
     //packet fake packet loss
     if (randomNum < 4) {
       printf("This is a simulated packet loss\n");
