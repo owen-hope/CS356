@@ -98,7 +98,7 @@ int main(int argc, char const *argv[]) {
 
     if (n <= 0) {
       printf("Ping message number %d timed out\n", pingCount);
-    } else {
+    } else if (serverMessagesConverted[0] == 2) {
       printf("ping message number %d RTT: %f secs\n", pingCount,
         RTTCalculation(start_time, end_time));
     }

@@ -46,15 +46,12 @@ int main(int argc, char const *argv[]) {
       arrayConverted[i] = ntohs(arrayReceived[i]);
     }
 
-    //change [0] from 1(ping request) to 2(ping response)
-    if (arrayConverted[0] == 1) {
-      arrayConverted[0] == 2;
-    }
-
     //packet fake packet loss
     if (randomNum < 4) {
       printf("This is a simulated packet loss\n");
-    }else {
+    }else if (arrayConverted[0] == 1) {
+      arrayConverted[0] == 2;
+
       //convert array back to byte order to send
       for (int i = 0; i < 2; i++) {
         arrayToSend[i] = htons(arrayConverted[i]);
