@@ -17,4 +17,4 @@ myList = [i.split('\t') for i in lines]
 
 print("\n")
 print("\n")
-print(myList)
+print(myList[2][3])
