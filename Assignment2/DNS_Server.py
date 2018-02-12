@@ -3,7 +3,7 @@ from socket import *
 lines = []
 with open("dns-master.txt", "r") as file:
     for line in file:
-        if line.startswith("#"):
+        if not line.strip() and line.startswith("#"):
             continue
         else:
             line = line.strip()
