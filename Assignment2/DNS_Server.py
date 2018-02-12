@@ -15,9 +15,7 @@ print(lines)
 
 myList = [i.split('\t') for i in lines]
 for i in range(len(myList)):
-    for j in range(len(myList[i])):
-        if myList[i][j] == '':
-            del myList[i][j]
+    myList[i] = filter(None, myList[i])
 print("\n")
 print("\n")
 print(myList)
