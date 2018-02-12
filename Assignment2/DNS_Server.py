@@ -17,7 +17,7 @@ myList = [i.split() for i in lines]
 authoritative_domain = myList[0]
 TTL = myList[1]
 
-info = myList[1:]
+info = myList[2:]
 print("\n")
 print("\n")
 print(myList)
