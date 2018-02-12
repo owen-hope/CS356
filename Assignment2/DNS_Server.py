@@ -13,9 +13,8 @@ with open("dns-master.txt", "r") as file:
 
 print(lines)
 
-myList = [i.split('\t') for i in lines]
-for i in range(len(myList)):
-    myList[i] = filter(None, myList[i])
+myList = [i.split() for i in lines]
+
 print("\n")
 print("\n")
 print(myList)
