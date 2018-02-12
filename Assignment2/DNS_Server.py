@@ -15,6 +15,8 @@ with open("dns-master.txt", "r") as file:
 print(lines)
 
 myList = [i.split('\t') for i in lines]
+for i in myList:
+    myList = i.strip()
 print("\n")
 print("\n")
 print(myList)
