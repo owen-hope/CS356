@@ -1,6 +1,7 @@
 from socket import *
 
 lines = []
+myList = []
 with open("dns-master.txt", "r") as file:
     for line in file:
         if not line.strip():
@@ -12,3 +13,5 @@ with open("dns-master.txt", "r") as file:
             lines.append(line)
 
 print(lines)
+
+myList = [i.split('\t') for i in lines]
