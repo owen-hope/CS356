@@ -16,8 +16,8 @@ print(lines)
 myList = [i.split('\t') for i in lines]
 for index in myList:
     for i in index:
-        if i == '':
-            del index[i]
+        if index[i] == '':
+            del myList[index][i]
 print("\n")
 print("\n")
 print(myList)
