@@ -21,3 +21,5 @@ info = myList[1:]
 print("\n")
 print("\n")
 print(myList)
+print("\n")
+print(info)
