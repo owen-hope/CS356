@@ -6,4 +6,4 @@ with open("dns-master.txt", "r") as file:
         line = line.strip()
         lines.append(line)
 
-print lines
+print(lines)
