@@ -20,4 +20,4 @@ for i in range(len(myList)):
             del myList[i][j]
 print("\n")
 print("\n")
-print(myList[2][3])
+print(myList)
