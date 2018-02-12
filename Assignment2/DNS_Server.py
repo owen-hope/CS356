@@ -14,10 +14,7 @@ with open("dns-master.txt", "r") as file:
 print(lines)
 
 myList = [i.split('\t') for i in lines]
-for index in myList:
-    for i in index:
-        if i == '':
-            myList.remove('')
+
 print("\n")
 print("\n")
 print(myList)
