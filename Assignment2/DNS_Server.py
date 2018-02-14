@@ -102,7 +102,7 @@ while True:
                     cnameIP = x[2]
         else:
             rcode = 3
-            break
+
     #the_message += struct.pack("!H", ID)
     #the_message += struct.pack("!H", STUFF)
 
