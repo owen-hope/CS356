@@ -85,15 +85,16 @@ while True:
     hostname = hostname[:-1]
     print("out of while loop")
     print(hostname)
+    i = 0
     while i < len(DNS_Log):
         print("here")
         print(DNS_Log[i])
         print(hostname)
-        if i[0] == hostname and i[1] == "A":
+        if DNS_Log[i][0] == hostname and DNS_Log[i][1] == "A":
             qtype = 1
             ipaddr += i[2]
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
-        elif i[0] == hostname and i[1] == "CNAME":
+        elif DNS_Log[i][0] == hostname and DNS_Log[i][1] == "CNAME":
             for x in DNS_Log:
                 if x[0] == i[2]:
                     cnamehost = x[0]
