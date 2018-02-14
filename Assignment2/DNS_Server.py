@@ -70,5 +70,5 @@ while True:
             hostletter = struct.unpack_from("!c", data, questionOffset)
             print(hostletter)
             questionOffset += 1
-            #hostname += hostletter[0]
-    #print(hostname)
+            hostname += hostletter[0]
+    print(hostname)
