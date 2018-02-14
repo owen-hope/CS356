@@ -32,7 +32,7 @@ serverIP = ""
 serverPort = 9007
 dataLen = 1000000
 QUESTIONOFFSET = 12
-the_message = []
+the_message = bytes([])
 
 # Create a UDP socket
 serverSocket = socket(AF_INET, SOCK_DGRAM)
