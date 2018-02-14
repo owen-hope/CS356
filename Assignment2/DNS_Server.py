@@ -131,7 +131,7 @@ while True:
 
     #Answers Section
     #TTL
-    the_message += struct.pack("!I", int(TTL))
+    the_message += struct.pack("!L", int(TTL))
 
     #RDLength
     #the_message += struct.pack("!H", )
