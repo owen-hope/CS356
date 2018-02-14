@@ -60,14 +60,10 @@ while True:
     hostname = ""
     while True:
         firstByte = struct.unpack_from("!B", data, questionOffset)
-
         print(firstByte[0])
         questionOffset += firstByte[0]
-        if firstByte == 0:
-        print(firstByte)
         working += firstByte[0]
         if firstByte[0] == 0:
-
             break
         for i in range(firstByte[0]):
             hostletter = struct.unpack_from("!c", data, i+questionOffset)
