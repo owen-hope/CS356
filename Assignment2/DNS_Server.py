@@ -69,6 +69,8 @@ while True:
         for i in range(firstByte[0]):
             hostname += struct.unpack_from("!c", data, questionOffset)[0].decode()
             print(hostname)
+            if (i + 1) == firstByte[0]:
+                hostname += "."
             questionOffset += 1
             #hostname += hostletter[0]
     #print(hostname)
