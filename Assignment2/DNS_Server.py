@@ -201,8 +201,10 @@ while True:
     len1 = len(rdataList[0])
     len2 = len(rdataList[1])
     len3 = len(rdataList[2])
-
+    print(rdataList[2])
     rdata = str(len1) + rdataList[0] + str(len2) + rdataList[1] + str(len3) + rdataList[2] + str(0)
+    RDLength = len(rdata)
+
     print(rdata)
 
     print(the_message)
