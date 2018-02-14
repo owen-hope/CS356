@@ -35,6 +35,7 @@ dataLen = 1000000
 QUESTIONOFFSET = 12
 the_message = bytes([])
 qtype = 1
+ipaddr = ""
 
 
 # Create a UDP socket
@@ -90,7 +91,7 @@ while True:
         print(hostname)
         if i[0] == hostname and i[1] == "A":
             qtype = 1
-            ipaddr = i[2]
+            ipaddr += i[2]
         elif i[0] == hostname and i[1] == "CNAME":
             for x in DNS_Log:
                 if x[0] == i[2]:
@@ -160,7 +161,7 @@ while True:
     for i in ipdata:
         ipdata[i] = int(ipdata[i])
         the_message += struct.pack("!BBBB", ipdata[0], ipdata[1], ipdata[2], ipdata[3])
-    
+
 
 
     print(the_message)
