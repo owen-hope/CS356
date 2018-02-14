@@ -106,6 +106,9 @@ while True:
 
     # NEED TO ADD INFO FOR STUFF: QR AA RCODE
     the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT)
+
+    #Question Section
+
     #The packing and encoding for host name
     qnameResponse = hostname.split(".")
     for name in qnameResponse:
@@ -124,5 +127,23 @@ while True:
 
     #Adding Qclass
     the_message += struct.pack("!H", 1)
+
+    #Answers Section
+    #name
+    for name in qnameResponse:
+        size = len(name)
+        the_message += struct.pack("!B", size)
+        #the_message += struct.pack("!c", name[0].encode())
+        print(the_message)
+        for x in range(size):
+            the_message += struct.pack("!c", name[x].encode())
+    the_message += struct.pack("!B", 0)
+
+    #Type
+    the_message += struct.pack("!H", qtype)
+
+    #Class
+    the_message += struct.pack("!H", 1)
+    
     print(the_message)
     serverSocket.sendto(the_message, address)
