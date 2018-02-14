@@ -65,6 +65,7 @@ while True:
         QUESTIONOFFSET += 1
 
         if firstByte[0] == 0:
+            print("equal 0")
             break
 
         for i in range(firstByte[0]):
