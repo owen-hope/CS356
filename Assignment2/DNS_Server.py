@@ -67,6 +67,7 @@ while True:
         if firstByte[0] == 0:
             print("equal 0")
             break
+            print("broke but still here")
         else:
             for i in range(firstByte[0]):
                 hostname += struct.unpack_from("!c", data, QUESTIONOFFSET)[0].decode()
