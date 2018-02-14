@@ -53,3 +53,4 @@ while True:
     print(QDCOUNT)
     print(ANCOUNT)
     print(NSCOUNT)
+    print(ARCOUNT)
