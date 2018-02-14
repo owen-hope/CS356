@@ -106,8 +106,8 @@ while True:
     the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT)
     qnameResponse = hostname.split(".")
     for name in qnameResponse:
-        
-        size = len(qnameResponse[name])
+
+        size = len(name)
         the_message += struct.pack("!B", size)
         for x in size:
             the_message += struct.pack("!c", size)
