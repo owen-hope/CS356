@@ -77,7 +77,7 @@ while True:
 
             hostname += "."
     hostname = hostname[:-1]
-    qtype = struct.unpack_from("!H", data, QUESTIONOFFSET+1)
+    qtype = struct.unpack_from("!H", data, QUESTIONOFFSET + 1)
     print(qtype)
     print("out of while loop")
     print(hostname)
