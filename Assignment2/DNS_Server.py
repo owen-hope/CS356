@@ -66,18 +66,19 @@ while True:
 
         if firstByte[0] == 0:
             print("equal 0")
-            test = False
+            break
         else:
             for i in range(firstByte[0]):
                 hostname += struct.unpack_from("!c", data, QUESTIONOFFSET)[0].decode()
                 print(hostname)
-                if (i + 1) == firstByte[0]:
-                    hostname += "."
+                
                 QUESTIONOFFSET += 1
+            hostname += "."
+    print("out of while loop")
     for i in DNS_Log:
         print("here")
-        print(type(i[0]))
-        print(type(hostname))
+        print(i[0])
+        print(hostname)
         if i[0] is hostname:
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             break
