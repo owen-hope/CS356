@@ -109,11 +109,11 @@ while True:
 
         size = len(name)
         the_message += struct.pack("!B", size)
-        the_message += struct.pack("!c", name[0].encode())
+        #the_message += struct.pack("!c", name[0].encode())
         print(the_message)
         for x in range(size):
-            test = name[0]
-            print(test)
-            the_message += struct.pack("!c", test)
+            #test = name[0]
+            #print(test)
+            the_message += struct.pack("!c", name[x].encode())
     print(the_message)
     serverSocket.sendto(the_message, address)
