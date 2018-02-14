@@ -31,6 +31,7 @@ print("\n")
 serverIP = ""
 serverPort = 9007
 dataLen = 1000000
+QUESTIONOFFSET = 12
 
 # Create a UDP socket
 serverSocket = socket(AF_INET, SOCK_DGRAM)
@@ -55,22 +56,21 @@ while True:
     print(NSCOUNT)
     print(ARCOUNT)
     print("\nThis is the start of the question section")
-    questionOffset = 12
+
     hostname = ""
 
     while True:
-        firstByte = struct.unpack_from("!B", data, questionOffset)
+        firstByte = struct.unpack_from("!B", data, QUESTIONOFFSET)
         print(firstByte[0])
-        questionOffset += 1
+        QUESTIONOFFSET += 1
 
         if firstByte[0] == 0:
             break
 
         for i in range(firstByte[0]):
-            hostname += struct.unpack_from("!c", data, questionOffset)[0].decode()
+            hostname += struct.unpack_from("!c", data, QUESTIONOFFSET)[0].decode()
             print(hostname)
             if (i + 1) == firstByte[0]:
                 hostname += "."
-            questionOffset += 1
-            #hostname += hostletter[0]
-    #print(hostname)
+            QUESTIONOFFSET += 1
+            
