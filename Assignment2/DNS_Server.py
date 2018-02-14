@@ -43,4 +43,4 @@ while True:
     # Receive the information from dig
     data, address = serverSocket.recvfrom(dataLen)
 
-    print("Data from client: " + data.decode())
+    print("Data from client: " + struct.unpack(data))
