@@ -57,7 +57,7 @@ while True:
 
     questionOffset = 12
     while True:
-        firstByte = struct.unpack_from("!H", data, questionOffset)
+        firstByte = struct.unpack_from("!B", data, questionOffset)
         print(firstByte)
         break
         #questionOffset += firstByte
