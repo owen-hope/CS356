@@ -123,6 +123,6 @@ while True:
     the_message += struct.pack("!H", qtype)
 
     #Adding Qclass
-    the_message += struct.pack("H", 1)
+    #the_message += struct.pack("H", 1)
     print(the_message)
     serverSocket.sendto(the_message, address)
