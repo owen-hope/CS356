@@ -129,21 +129,12 @@ while True:
     the_message += struct.pack("!H", 1)
 
     #Answers Section
-    #name
-    for name in qnameResponse:
-        size = len(name)
-        the_message += struct.pack("!B", size)
-        #the_message += struct.pack("!c", name[0].encode())
-        print(the_message)
-        for x in range(size):
-            the_message += struct.pack("!c", name[x].encode())
-    the_message += struct.pack("!B", 0)
+    #TTL
+    the_message += struct.pack("!I", TTL)
 
-    #Type
-    the_message += struct.pack("!H", qtype)
+    #RDLength
+    #the_message += struct.pack("!H", )
 
-    #Class
-    the_message += struct.pack("!H", 1)
-    
+
     print(the_message)
     serverSocket.sendto(the_message, address)
