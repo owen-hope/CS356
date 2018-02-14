@@ -163,7 +163,7 @@ while True:
     print(ipaddr)
     ipdata = ipaddr.split(".")
     print(ipdata)
-    for i in range(ipdata):
+    for i in len(ipdata):
         ipdata[i] = int(ipdata[i])
         the_message += struct.pack("!BBBB", ipdata[0], ipdata[1], ipdata[2], ipdata[3])
 
