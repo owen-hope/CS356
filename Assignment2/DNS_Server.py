@@ -59,10 +59,10 @@ while True:
     while True:
         firstByte = struct.unpack_from("!B", data, questionOffset)
         print(firstByte)
-        questionOffset += firstByte
+        questionOffset += firstByte[0]
         if firstByte == 0:
             break
         for i in range(firstByte):
             hostletter = struct.unpack_from("!c", data, i)
-            hostname += hostletter
+            hostname += hostletter[0]
     print(hostname)
