@@ -78,6 +78,7 @@ while True:
             hostname += "."
     hostname = hostname[:-1]
     print("out of while loop")
+    print(hostname)
     for i in DNS_Log:
         print("here")
         print(i[0])
