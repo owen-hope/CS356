@@ -76,7 +76,7 @@ while True:
                 QUESTIONOFFSET += 1
 
             hostname += "."
-    QTYPE = struct.unpack_from("!B", data, QUESTIONOFFSET)
+    #QTYPE = struct.unpack_from("!B", data, QUESTIONOFFSET)
     hostname = hostname[:-1]
     print("out of while loop")
     print(hostname)
