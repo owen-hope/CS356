@@ -1,5 +1,6 @@
 from socket import *
 import sys
+import struct
 
 lines = []
 with open("dns-master.txt", "r") as file:
