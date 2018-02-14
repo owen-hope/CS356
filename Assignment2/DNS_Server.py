@@ -109,6 +109,7 @@ while True:
 
         size = len(name)
         the_message += struct.pack("!B", size)
+        print(the_message)
         for x in range(size):
             the_message += struct.pack("!c", name)
     print(the_message)
