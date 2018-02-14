@@ -37,7 +37,6 @@ serverSocket = socket(AF_INET, SOCK_DGRAM)
 # Addign IP address and port number to socket
 serverSocket.bind((serverIP, serverPort))
 
-DNS_MESSAGE_HEADER = struct.Struct("!6H")
 
 print("The server is ready to receve on port: " + str(serverPort))
 print("\n")
@@ -45,5 +44,5 @@ print("\n")
 while True:
     # Receive the information from dig
     data, address = serverSocket.recvfrom(dataLen)
-    ID, STUFF, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT = DNS_MESSAGE_HEADER.unpack(data)
+    ID, STUFF, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT = DNS_MESSAGE_HEADER.unpack("!HHHHHH", data)
     #print("Data from client: " + ID)
