@@ -73,4 +73,7 @@ while True:
             if (i + 1) == firstByte[0]:
                 hostname += "."
             QUESTIONOFFSET += 1
-            
+    for i in range(DNS_Log):
+        if i[0] == hostname:
+            print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
+            break        
