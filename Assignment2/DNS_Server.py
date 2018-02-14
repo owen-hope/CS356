@@ -67,8 +67,8 @@ while True:
             break
 
         for i in range(firstByte[0]):
-            hostletter = struct.unpack_from("!c", data, questionOffset)
-            print(hostletter)
+            hostname += struct.unpack_from("!c", data, questionOffset)[0].decode()
+            print(hostname)
             questionOffset += 1
             #hostname += hostletter[0]
     #print(hostname)
