@@ -37,6 +37,8 @@ the_message = bytes([])
 qtype = 1
 ipaddr = ""
 ancount = 0
+nscount = 0
+rdata = ""
 
 # Create a UDP socket
 serverSocket = socket(AF_INET, SOCK_DGRAM)
@@ -107,11 +109,14 @@ while True:
             rcode = 3
             i += 1
 
-    #the_message += struct.pack("!H", ID)
-    #the_message += struct.pack("!H", STUFF)
+    #count the authority
+    for x in range(len(DNS_Log)):
+        if DNS_Log[x][1] == "NS":
+            nscount += 1
+            rdata += DNS_Log[x][2]
 
     # NEED TO ADD INFO FOR STUFF: QR AA RCODE
-    the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ancount, NSCOUNT, ARCOUNT)
+    the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ancount, nscount, ARCOUNT)
     #the_message += struct.pack("!H", ID)
     #struct.pack_into("!B", the_message, 2, 1)
 
@@ -169,7 +174,36 @@ while True:
 
     the_message += struct.pack("!BBBB", ipdata[0], ipdata[1], ipdata[2], ipdata[3])
 
+    #Authority Section
+    #Name
+    for name in qnameResponse:
+        size = len(name)
+        the_message += struct.pack("!B", size)
+        #the_message += struct.pack("!c", name[0].encode())
+        print(the_message)
+        for x in range(size):
+            #test = name[0]
+            #print(test)
+            the_message += struct.pack("!c", name[x].encode())
+    the_message += struct.pack("!B", 0)
 
+    #type
+    the_message += struct.pack("!H", qtype)
+
+    #class
+    the_message += struct.pack("!H", 1)
+
+    #TTL
+    the_message += struct.pack("!L", int(TTL))
+
+    #RDLength calculating
+    rdataList = rdata.split(".")
+    len1 = len(rdataList[0])
+    len2 = len(rdataList[1])
+    len3 = len(rdataList[2])
+
+    rdata = len1 + rdataList[0] + len2 + rdataList[1] + len3 + rdataList[2] + 0
+    print(rdata)
 
     print(the_message)
     serverSocket.sendto(the_message, address)
