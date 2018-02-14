@@ -46,6 +46,6 @@ while True:
     data, address = serverSocket.recvfrom(dataLen)
     print(data)
     #, STUFF, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT
-    ID = struct.unpack_from("!H", data)
+    ID, STUFF = struct.unpack_from("!HH", data)
     #print("Data from client: " + ID)
     print(ID)
