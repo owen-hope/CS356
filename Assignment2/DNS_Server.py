@@ -101,6 +101,14 @@ while True:
             break
     #the_message += struct.pack("!H", ID)
     #the_message += struct.pack("!H", STUFF)
+
+    # NEED TO ADD INFO FOR STUFF: QR AA RCODE
     the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT)
+    qnameResponse = hostname.split(".")
+    for name in qnameResponse:
+        size = len(qnameResponse[name])
+        the_message += struct.pack("!B", size)
+        for x in size:
+        the_message += struct.pack("!c", size)
     print(the_message)
     serverSocket.sendto(the_message, address)
