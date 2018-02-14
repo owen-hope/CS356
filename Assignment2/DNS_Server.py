@@ -64,6 +64,6 @@ while True:
         if firstByte == 0:
             break
         for i in range(firstByte[0]):
-            hostletter = struct.unpack_from("!c", data, i)
-            hostname += hostletter[0]
+            hostletter += struct.unpack_from("!c", data, i)
+            #hostname += hostletter[0]
     print(hostname)
