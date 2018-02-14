@@ -99,8 +99,8 @@ while True:
 
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             break
-    the_message += struct.pack("!H", ID)
-    the_message += struct.pack("!H", STUFF)
-    the_message += struct.pack("!HHHH", QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT)
+    #the_message += struct.pack("!H", ID)
+    #the_message += struct.pack("!H", STUFF)
+    the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT)
     print(the_message)
     serverSocket.sendto(the_message, address)
