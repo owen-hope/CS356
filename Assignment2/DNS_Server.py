@@ -157,6 +157,7 @@ while True:
     the_message += struct.pack("!H", 4)
 
     #Rdata
+    print(ipaddr)
     ipdata = ipaddr.split(".")
     print(ipdata)
     for i in ipdata:
