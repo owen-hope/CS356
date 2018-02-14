@@ -83,6 +83,6 @@ while True:
         print("here")
         print(i[0])
         print(hostname)
-        if i[0] is hostname:
+        if i[0] == hostname:
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             break
