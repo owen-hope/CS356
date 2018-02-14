@@ -76,15 +76,23 @@ while True:
                 QUESTIONOFFSET += 1
 
             hostname += "."
+    QTYPE = struct.unpack_from("!B", data, QUESTIONOFFSET)
     hostname = hostname[:-1]
-    qtype = struct.unpack_from("!H", data, QUESTIONOFFSET + 1)
-    print(qtype)
     print("out of while loop")
     print(hostname)
     for i in DNS_Log:
         print("here")
         print(i[0])
         print(hostname)
-        if i[0] == hostname:
+        if i[0] == hostname and i[1] == "A":
+            qtype = 1
+            ipaddr = i[2]
+        elif i[0] == hostname and i[1] == "CNAME":
+            for x in DNS_Log:
+                if x[0] == i[2]:
+                    cnamehost = x[0]
+                    cnameQtype = x[1]
+                    cnameIP = x[2]
+
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             break
