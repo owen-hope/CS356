@@ -56,17 +56,19 @@ while True:
     print(ARCOUNT)
     print("\nThis is the start of the question section")
     questionOffset = 12
-    working = 12
     hostname = ""
+
     while True:
         firstByte = struct.unpack_from("!B", data, questionOffset)
         print(firstByte[0])
-        questionOffset += firstByte[0]
-        working += firstByte[0]
+        questionOffset += 1
+
         if firstByte[0] == 0:
             break
+
         for i in range(firstByte[0]):
-            hostletter = struct.unpack_from("!c", data, i+questionOffset)
+            hostletter = struct.unpack_from("!c", data, questionOffset)
             print(hostletter)
+            questionOffset += 1
             #hostname += hostletter[0]
-    print(hostname)
+    #print(hostname)
