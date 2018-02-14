@@ -37,3 +37,10 @@ serverSocket = socket(AF_INET, SOCK_DGRAM)
 serverSocket.bind((serverIP, serverPort))
 
 print("The server is ready to receve on port: " + str(serverPort))
+print("\n")
+
+while True:
+    # Receive the information from dig
+    data, address = serverSocket.recvfrom(dataLen)
+
+    print("Data from client: " data.decode())
