@@ -76,6 +76,7 @@ while True:
                 QUESTIONOFFSET += 1
     for i in DNS_Log:
         print("here")
+        print(i[0])
         if i[0] == hostname:
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             break
