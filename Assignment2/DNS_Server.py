@@ -77,6 +77,6 @@ while True:
     for i in DNS_Log:
         print("here")
         print(i[0])
-        if i[0] == hostname:
+        if i[0] is hostname:
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             break
