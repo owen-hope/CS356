@@ -49,3 +49,4 @@ while True:
     ID, STUFF = struct.unpack_from("!HH", data)
     #print("Data from client: " + ID)
     print(ID)
+    print(STUFF)
