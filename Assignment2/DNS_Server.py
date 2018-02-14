@@ -56,6 +56,7 @@ while True:
     print(ARCOUNT)
     print("\nThis is the start of the question section")
     questionOffset = 12
+    hostname = ""
     while True:
         firstByte = struct.unpack_from("!B", data, questionOffset)
         print(firstByte)
