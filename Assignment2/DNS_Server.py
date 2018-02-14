@@ -1,4 +1,5 @@
 from socket import *
+import sys
 
 lines = []
 with open("dns-master.txt", "r") as file:
@@ -27,3 +28,15 @@ print("\n")
 print(info)
 print("\n")
 print(DNS_Log)
+print("\n")
+
+serverIP = ""
+serverPort = 9007
+dataLen = 1000000
+
+# Create a UDP socket
+serverSocket = socket(AF_INET, SOCK_DGRAM)
+# Addign IP address and port number to socket
+serverSocket.bind((serverIP, serverPort))
+
+print("The server is ready to receve on port: " + str(serverPort))
