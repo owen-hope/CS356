@@ -104,9 +104,9 @@ while True:
 
     # NEED TO ADD INFO FOR STUFF: QR AA RCODE
     the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT)
+    #The packing and encoding for host name
     qnameResponse = hostname.split(".")
     for name in qnameResponse:
-
         size = len(name)
         the_message += struct.pack("!B", size)
         #the_message += struct.pack("!c", name[0].encode())
@@ -115,5 +115,6 @@ while True:
             #test = name[0]
             #print(test)
             the_message += struct.pack("!c", name[x].encode())
+    the_message += struct.pack("!B", 0)
     print(the_message)
     serverSocket.sendto(the_message, address)
