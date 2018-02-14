@@ -109,6 +109,6 @@ while True:
         size = len(qnameResponse[name])
         the_message += struct.pack("!B", size)
         for x in size:
-        the_message += struct.pack("!c", size)
+            the_message += struct.pack("!c", size)
     print(the_message)
     serverSocket.sendto(the_message, address)
