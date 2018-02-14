@@ -94,12 +94,14 @@ while True:
             qtype = 1
             ipaddr += DNS_Log[i][2]
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
+            break
         elif DNS_Log[i][0] == hostname and DNS_Log[i][1] == "CNAME":
             for x in DNS_Log:
                 if x[0] == DNS_Log[i][2]:
                     cnamehost = x[0]
                     qtype = 5
                     cnameIP = x[2]
+                    break
         else:
             rcode = 3
             i += 1
