@@ -109,7 +109,7 @@ while True:
 
         size = len(name)
         the_message += struct.pack("!B", size)
-        the_message += struct.pack("!c", name[0])
+        the_message += struct.pack("!c", name[0].encode())
         print(the_message)
         for x in range(size):
             test = name[0]
