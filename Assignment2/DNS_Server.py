@@ -98,4 +98,5 @@ while True:
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             break
     the_message += struct.pack("!H", ID)
+    the_message += struct.pack("!B", 1)
     serverSocket.sendto(the_message, address)
