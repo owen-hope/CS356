@@ -18,9 +18,9 @@ myList = [i.split() for i in lines]
 authoritative_domain = myList[0]
 TTL = myList[1]
 
-info = myList[2:]
+DNS_Log = myList[2:]
 
-DNS_Log = {words[0]:words[1:] for words in info}
+
 print("\n")
 print("\n")
 print(myList)
