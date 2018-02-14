@@ -107,9 +107,10 @@ while True:
 
     # NEED TO ADD INFO FOR STUFF: QR AA RCODE
     the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT)
+    #the_message += struct.pack("!H", ID)
+    #struct.pack_into("!B", the_message, 2, 1)
 
     #Question Section
-
     #The packing and encoding for host name
     qnameResponse = hostname.split(".")
     for name in qnameResponse:
@@ -130,11 +131,36 @@ while True:
     the_message += struct.pack("!H", 1)
 
     #Answers Section
+    #name
+    for name in qnameResponse:
+        size = len(name)
+        the_message += struct.pack("!B", size)
+        #the_message += struct.pack("!c", name[0].encode())
+        print(the_message)
+        for x in range(size):
+            #test = name[0]
+            #print(test)
+            the_message += struct.pack("!c", name[x].encode())
+    the_message += struct.pack("!B", 0)
+
+    #type
+    the_message += struct.pack("!H", qtype)
+
+    #class
+    the_message += struct.pack("!H", 1)
+
     #TTL
     the_message += struct.pack("!L", int(TTL))
 
     #RDLength
-    #the_message += struct.pack("!H", )
+    the_message += struct.pack("!H", 4)
+
+    #Rdata
+    ipdata = ipaddr.split(".")
+    for i in ipdata:
+        ipdata[i] = int(ipdata[i])
+        the_message += struct.pack("!BBBB", ipdata[0], ipdata[1], ipdata[2], ipdata[3])
+    
 
 
     print(the_message)
