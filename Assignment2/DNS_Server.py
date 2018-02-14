@@ -85,9 +85,9 @@ while True:
     hostname = hostname[:-1]
     print("out of while loop")
     print(hostname)
-    for i in DNS_Log:
+    for lists in DNS_Log:
         print("here")
-        print(i)
+        print(lists)
         print(hostname)
         if i[0] == hostname and i[1] == "A":
             qtype = 1
