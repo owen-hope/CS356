@@ -36,7 +36,7 @@ QUESTIONOFFSET = 12
 the_message = bytes([])
 qtype = 1
 ipaddr = ""
-
+ancount = 0
 
 # Create a UDP socket
 serverSocket = socket(AF_INET, SOCK_DGRAM)
@@ -94,6 +94,7 @@ while True:
             qtype = 1
             ipaddr += DNS_Log[i][2]
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
+            ancount += 1
             break
         elif DNS_Log[i][0] == hostname and DNS_Log[i][1] == "CNAME":
             for x in DNS_Log:
@@ -110,7 +111,7 @@ while True:
     #the_message += struct.pack("!H", STUFF)
 
     # NEED TO ADD INFO FOR STUFF: QR AA RCODE
-    the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT)
+    the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ancount, NSCOUNT, ARCOUNT)
     #the_message += struct.pack("!H", ID)
     #struct.pack_into("!B", the_message, 2, 1)
 
