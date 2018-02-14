@@ -12,8 +12,6 @@ with open("dns-master.txt", "r") as file:
             line = line.strip()
             lines.append(line)
 
-print(lines)
-
 myList = [i.split() for i in lines]
 authoritative_domain = myList[0]
 TTL = myList[1]
@@ -25,7 +23,6 @@ print("\n")
 print("\n")
 print(myList)
 print("\n")
-print(info)
 print("\n")
 print(DNS_Log)
 print("\n")
