@@ -92,6 +92,7 @@ while True:
         if i[0] == hostname and i[1] == "A":
             qtype = 1
             ipaddr += i[2]
+            print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
         elif i[0] == hostname and i[1] == "CNAME":
             for x in DNS_Log:
                 if x[0] == i[2]:
@@ -100,8 +101,6 @@ while True:
                     cnameIP = x[2]
         else:
             rcode = 3
-
-            print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             break
     #the_message += struct.pack("!H", ID)
     #the_message += struct.pack("!H", STUFF)
