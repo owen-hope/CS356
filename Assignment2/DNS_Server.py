@@ -58,17 +58,16 @@ while True:
     print("\nThis is the start of the question section")
 
     hostname = ""
-
-    while True:
+    test = True
+    while test:
         firstByte = struct.unpack_from("!B", data, QUESTIONOFFSET)
         print(firstByte[0])
         QUESTIONOFFSET += 1
 
         if firstByte[0] == 0:
             print("equal 0")
-            break
+            test = False
         else:
-
             for i in range(firstByte[0]):
                 hostname += struct.unpack_from("!c", data, QUESTIONOFFSET)[0].decode()
                 print(hostname)
