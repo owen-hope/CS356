@@ -94,10 +94,13 @@ while True:
                     cnamehost = x[0]
                     cnameQtype = x[1]
                     cnameIP = x[2]
+        else:
+            rcode = 3
 
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             break
     the_message += struct.pack("!H", ID)
-    the_message += struct.pack("!B", 1)
+    the_message += struct.pack("!H", STUFF)
+    the_message += struct.pack("!H", QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT)
     print(the_message)
     serverSocket.sendto(the_message, address)
