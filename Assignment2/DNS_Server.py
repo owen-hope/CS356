@@ -72,10 +72,11 @@ while True:
             for i in range(firstByte[0]):
                 hostname += struct.unpack_from("!c", data, QUESTIONOFFSET)[0].decode()
                 print(hostname)
-                
+
                 QUESTIONOFFSET += 1
 
             hostname += "."
+    hostname = hostname[:-1]
     print("out of while loop")
     for i in DNS_Log:
         print("here")
