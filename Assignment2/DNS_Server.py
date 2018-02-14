@@ -54,3 +54,9 @@ while True:
     print(ANCOUNT)
     print(NSCOUNT)
     print(ARCOUNT)
+
+    questionOffset = 12
+    while True:
+        firstByte = struct.unpack_from("!H", data, qnameStart)
+        print(firstByte)
+        #questionOffset += firstByte
