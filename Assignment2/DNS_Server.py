@@ -114,6 +114,7 @@ while True:
         if DNS_Log[x][1] == "NS":
             nscount += 1
             rdata += DNS_Log[x][2]
+            print(rdata)
 
     # NEED TO ADD INFO FOR STUFF: QR AA RCODE
     the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ancount, nscount, ARCOUNT)
