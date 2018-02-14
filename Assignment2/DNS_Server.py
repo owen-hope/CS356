@@ -58,6 +58,7 @@ while True:
     print("\nThis is the start of the question section")
 
     hostname = ""
+    count = 1
     test = True
     while test:
         firstByte = struct.unpack_from("!B", data, QUESTIONOFFSET)
@@ -71,8 +72,9 @@ while True:
             for i in range(firstByte[0]):
                 hostname += struct.unpack_from("!c", data, QUESTIONOFFSET)[0].decode()
                 print(hostname)
-                if i == firstByte[0] and i != 0:
+                if i == firstByte[0] and count >= 2:
                     hostname += "."
+                    cout += 1
                 QUESTIONOFFSET += 1
 
             hostname += "."
