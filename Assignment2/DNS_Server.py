@@ -92,7 +92,7 @@ while True:
             for x in DNS_Log:
                 if x[0] == i[2]:
                     cnamehost = x[0]
-                    cnameQtype = x[1]
+                    qtype = 5
                     cnameIP = x[2]
         else:
             rcode = 3
@@ -116,5 +116,11 @@ while True:
             #print(test)
             the_message += struct.pack("!c", name[x].encode())
     the_message += struct.pack("!B", 0)
+
+    #Adding Qtype
+    the_message += struct.pack("!B", qtype)
+
+    #Adding Qclass
+    the_message += struct.pack("B", 1)
     print(the_message)
     serverSocket.sendto(the_message, address)
