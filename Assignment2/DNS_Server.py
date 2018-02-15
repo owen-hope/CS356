@@ -42,6 +42,7 @@ ipaddr = ""
 ancount = 0
 nscount = 0
 rdata = ""
+domainname = True
 
 # Create a UDP socket
 serverSocket = socket(AF_INET, SOCK_DGRAM)
@@ -117,6 +118,7 @@ while True:
             ancount = 0
             nscount = 0
             ARCOUNT = 0
+            domainname = False
         i += 1
 
     #count the authority
@@ -135,90 +137,91 @@ while True:
 
     #Question Section
     #The packing and encoding for host name
-    qnameResponse = hostname.split(".")
-    for name in qnameResponse:
-        size = len(name)
-        the_message += struct.pack("!B", size)
-        #the_message += struct.pack("!c", name[0].encode())
-        print(the_message)
-        for x in range(size):
-            #test = name[0]
-            #print(test)
-            the_message += struct.pack("!c", name[x].encode())
-    the_message += struct.pack("!B", 0)
+    if domainname == True:
+        qnameResponse = hostname.split(".")
+        for name in qnameResponse:
+            size = len(name)
+            the_message += struct.pack("!B", size)
+            #the_message += struct.pack("!c", name[0].encode())
+            print(the_message)
+            for x in range(size):
+                #test = name[0]
+                #print(test)
+                the_message += struct.pack("!c", name[x].encode())
+        the_message += struct.pack("!B", 0)
 
-    #Adding Qtype
-    the_message += struct.pack("!H", qtype)
+        #Adding Qtype
+        the_message += struct.pack("!H", qtype)
 
-    #Adding Qclass
-    the_message += struct.pack("!H", 1)
+        #Adding Qclass
+        the_message += struct.pack("!H", 1)
 
-    #Answers Section
-    #name
-    for name in qnameResponse:
-        size = len(name)
-        the_message += struct.pack("!B", size)
-        #the_message += struct.pack("!c", name[0].encode())
-        print(the_message)
-        for x in range(size):
-            #test = name[0]
-            #print(test)
-            the_message += struct.pack("!c", name[x].encode())
-    the_message += struct.pack("!B", 0)
+        #Answers Section
+        #name
+        for name in qnameResponse:
+            size = len(name)
+            the_message += struct.pack("!B", size)
+            #the_message += struct.pack("!c", name[0].encode())
+            print(the_message)
+            for x in range(size):
+                #test = name[0]
+                #print(test)
+                the_message += struct.pack("!c", name[x].encode())
+        the_message += struct.pack("!B", 0)
 
-    #type
-    the_message += struct.pack("!H", qtype)
+        #type
+        the_message += struct.pack("!H", qtype)
 
-    #class
-    the_message += struct.pack("!H", 1)
+        #class
+        the_message += struct.pack("!H", 1)
 
-    #TTL
-    the_message += struct.pack("!L", int(TTL))
+        #TTL
+        the_message += struct.pack("!L", int(TTL))
 
-    #RDLength
-    the_message += struct.pack("!H", 4)
+        #RDLength
+        the_message += struct.pack("!H", 4)
 
-    #Rdata
-    print(ipaddr)
-    ipdata = ipaddr.split(".")
-    print(ipdata)
-    for i in range(len(ipdata)):
-        ipdata[i] = int(ipdata[i])
+        #Rdata
+        print(ipaddr)
+        ipdata = ipaddr.split(".")
+        print(ipdata)
+        for i in range(len(ipdata)):
+            ipdata[i] = int(ipdata[i])
 
-    the_message += struct.pack("!BBBB", ipdata[0], ipdata[1], ipdata[2], ipdata[3])
+        the_message += struct.pack("!BBBB", ipdata[0], ipdata[1], ipdata[2], ipdata[3])
 
-    #Authority Section
-    #Name
-    for name in qnameResponse:
-        size = len(name)
-        the_message += struct.pack("!B", size)
-        #the_message += struct.pack("!c", name[0].encode())
-        print(the_message)
-        for x in range(size):
-            #test = name[0]
-            #print(test)
-            the_message += struct.pack("!c", name[x].encode())
-    the_message += struct.pack("!B", 0)
+        #Authority Section
+        #Name
+        for name in qnameResponse:
+            size = len(name)
+            the_message += struct.pack("!B", size)
+            #the_message += struct.pack("!c", name[0].encode())
+            print(the_message)
+            for x in range(size):
+                #test = name[0]
+                #print(test)
+                the_message += struct.pack("!c", name[x].encode())
+        the_message += struct.pack("!B", 0)
 
-    #type
-    the_message += struct.pack("!H", qtype)
+        #type
+        the_message += struct.pack("!H", qtype)
 
-    #class
-    the_message += struct.pack("!H", 1)
+        #class
+        the_message += struct.pack("!H", 1)
 
-    #TTL
-    the_message += struct.pack("!L", int(TTL))
+        #TTL
+        the_message += struct.pack("!L", int(TTL))
 
-    #RDLength calculating
-    rdataList = rdata.split(".")
-    len1 = len(rdataList[0])
-    len2 = len(rdataList[1])
-    len3 = len(rdataList[2])
-    print(rdataList[2])
-    rdata = str(len1) + rdataList[0] + str(len2) + rdataList[1] + str(len3) + rdataList[2] + str(0)
-    RDLength = len(rdata)
+        #RDLength calculating
+        rdataList = rdata.split(".")
+        len1 = len(rdataList[0])
+        len2 = len(rdataList[1])
+        len3 = len(rdataList[2])
+        print(rdataList[2])
+        rdata = str(len1) + rdataList[0] + str(len2) + rdataList[1] + str(len3) + rdataList[2] + str(0)
+        RDLength = len(rdata)
 
-    print(rdata)
+        print(rdata)
 
     print(the_message)
     serverSocket.sendto(the_message, address)
