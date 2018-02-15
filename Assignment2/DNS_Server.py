@@ -123,7 +123,8 @@ while True:
 
     # NEED TO ADD INFO FOR STUFF: QR AA RCODE
     the_message += struct.pack("!H", ID)
-    the_message += struct.pack("!H", 1000010000000000.to_bytes(2,sys.byteorder))
+    stuff = 1000010000000000
+    the_message += struct.pack("!H", stuff)
 
 
     the_message += struct.pack("!HHHH", QDCOUNT, ancount, nscount, ARCOUNT)
