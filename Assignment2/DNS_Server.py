@@ -123,7 +123,7 @@ while True:
 
     # NEED TO ADD INFO FOR STUFF: QR AA RCODE
     the_message += struct.pack("!H", ID)
-    stuff = 1000010000000000
+    stuff = int("1000010000000000", base  = 2)
     the_message += struct.pack("!H", stuff)
 
 
