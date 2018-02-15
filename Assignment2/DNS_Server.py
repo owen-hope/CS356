@@ -101,6 +101,7 @@ while True:
             ipaddr += DNS_Log[i][2]
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             ancount += 1
+            stuff = int("1000010000000000", base  = 2)
             break
         elif DNS_Log[i][0] == hostname and DNS_Log[i][1] == "CNAME":
             for x in DNS_Log:
@@ -109,10 +110,14 @@ while True:
                     qtype = 5
                     cnameIP = x[2]
                     rcode = 0
+                    stuff = int("1000010000000000", base  = 2)
                     break
         else:
-            rcode = 3
-            i += 1
+            stuff = int("1000010000000011", base  = 2)
+            ancount = 0
+            nscount = 0
+            ARCOUNT = 0
+        i += 1
 
     #count the authority
     for x in range(len(DNS_Log)):
@@ -123,10 +128,7 @@ while True:
 
     # NEED TO ADD INFO FOR STUFF: QR AA RCODE
     the_message += struct.pack("!H", ID)
-    stuff = int("1000010000000000", base  = 2)
     the_message += struct.pack("!H", stuff)
-
-
     the_message += struct.pack("!HHHH", QDCOUNT, ancount, nscount, ARCOUNT)
     #the_message += struct.pack("!H", ID)
     #struct.pack_into("!B", the_message, 2, 1)
