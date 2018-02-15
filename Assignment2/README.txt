@@ -15,5 +15,6 @@ References used:
   The PDF document provided and slides
 
 Other comments:
+  Must rerun the server after every dig command that gets sent to it
   I was not able to get the authority and additional section to work properly for the Assignment mainly because I ran out of time.
   Besides that the proper out put should correct for the header, question section, and answer section
