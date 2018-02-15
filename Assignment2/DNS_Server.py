@@ -97,6 +97,7 @@ while True:
         print(hostname)
         if DNS_Log[i][0] == hostname and DNS_Log[i][1] == "A":
             qtype = 1
+            rcode = 0
             ipaddr += DNS_Log[i][2]
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             ancount += 1
@@ -107,6 +108,7 @@ while True:
                     cnamehost = x[0]
                     qtype = 5
                     cnameIP = x[2]
+                    rcode = 0
                     break
         else:
             rcode = 3
@@ -120,7 +122,10 @@ while True:
             print(rdata)
 
     # NEED TO ADD INFO FOR STUFF: QR AA RCODE
-    the_message += struct.pack("!HHHHHH", ID, STUFF, QDCOUNT, ancount, nscount, ARCOUNT)
+    the_message += struct.pack("!H", ID)
+    struct.pack_into("!B", the_message, 2)
+
+    the_message += struct.pack("!HHHH", QDCOUNT, ancount, nscount, ARCOUNT)
     #the_message += struct.pack("!H", ID)
     #struct.pack_into("!B", the_message, 2, 1)
 
