@@ -103,6 +103,7 @@ while True:
             print("trueeeeeeeeeeeeeeeee booiiiiiiiiii")
             ancount += 1
             stuff = int("1000010000000000", base  = 2)
+            domainname = True
             break
         elif DNS_Log[i][0] == hostname and DNS_Log[i][1] == "CNAME":
             for x in DNS_Log:
@@ -112,6 +113,7 @@ while True:
                     cnameIP = x[2]
                     rcode = 0
                     stuff = int("1000010000000000", base  = 2)
+                    domainname = True
                     break
         else:
             stuff = int("1000010000000011", base  = 2)
