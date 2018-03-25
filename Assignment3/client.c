@@ -10,22 +10,25 @@
 #include <netinet/in.h>
 
 int main(int argc, char const *argv[]) {
-  const char *webUrl;
+
   int pos = 0;
   char *token;
   char getInfo[100];
-  char infoSplit[100];
+  char* infoSplit[100];
   int net_Socket, connection_status;
   char server_response[256];
 
   //localhost:9007/filename.html
-  webUrl = argv[1];
+  const char *webUrl[] = argv[1];
   strcpy(getInfo, webUrl);
 
   token = strtok(webUrl, ":/");
+
   while (token != NULL) {
     token = strtok(NULL, ":/");
-    infoSplit[pos] = token;
+
+    infoSplit[pos] = malloc(strlen(token) + 1);
+    strcpy(infoSplit[pos], token);
     pos++;
   }
 
